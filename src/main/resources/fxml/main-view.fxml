@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.Label?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.autopay.parking.ui.controller.MainController"
+            styleClass="root-pane">
+    <top>
+        <HBox styleClass="header" alignment="CENTER_LEFT" spacing="16">
+            <StackPane styleClass="brand-mark">
+                <Label styleClass="brand-letter" text="P"/>
+            </StackPane>
+            <Label styleClass="header-title" text="Autopago Estacionamiento"/>
+            <HBox HBox.hgrow="ALWAYS" styleClass="header-spacer"/>
+            <Button styleClass="button-secondary header-button"
+                    text="Administración web"
+                    onAction="#onAdminClicked"/>
+        </HBox>
+    </top>
+    <center>
+        <StackPane fx:id="contentArea" styleClass="content-area"/>
+    </center>
+</BorderPane>

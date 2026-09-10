@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.autopay.parking.ui.controller.ConfirmScreenController"
+      styleClass="screen" spacing="24" alignment="CENTER">
+    <HBox fx:id="stepsBox" alignment="CENTER"/>
+    <Label styleClass="title" text="Confirme su ticket"/>
+    <VBox styleClass="card" alignment="CENTER" spacing="16" maxWidth="680">
+        <Label fx:id="ticketCodeLabel" styleClass="ticket-code" text="—"/>
+        <HBox spacing="24" alignment="CENTER">
+            <VBox styleClass="detail-box" alignment="CENTER" spacing="6">
+                <Label styleClass="detail-label" text="Entrada"/>
+                <Label fx:id="entryTimeLabel" styleClass="detail-value" text="—"/>
+            </VBox>
+            <VBox styleClass="detail-box" alignment="CENTER" spacing="6">
+                <Label styleClass="detail-label" text="Tiempo"/>
+                <Label fx:id="durationLabel" styleClass="detail-value" text="—"/>
+            </VBox>
+            <VBox styleClass="detail-box" alignment="CENTER" spacing="6">
+                <Label styleClass="detail-label" text="Tarifa"/>
+                <Label fx:id="tariffLabel" styleClass="detail-value" text="—"/>
+            </VBox>
+        </HBox>
+        <Region prefHeight="1"/>
+        <Label styleClass="detail-label" text="Total a pagar"/>
+        <Label fx:id="amountLabel" styleClass="amount-big" text="—"/>
+        <Label fx:id="amountUsdLabel" styleClass="amount-usd" text="—"/>
+        <HBox spacing="16">
+            <Button styleClass="button-secondary" text="Cancelar" onAction="#onCancelClicked"/>
+            <Button styleClass="button-primary button-lg" text="Pagar ahora" onAction="#onPayClicked"/>
+        </HBox>
+    </VBox>
+</VBox>

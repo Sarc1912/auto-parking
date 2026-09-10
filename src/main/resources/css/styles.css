@@ -1,0 +1,691 @@
+/* ============================================================
+   Autopago Estacionamiento — Estilos premium del kiosco
+   Paleta: azul profundo + acento verde de éxito
+   ============================================================ */
+
+.root {
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+    -fx-focus-color: #2563eb;
+    -fx-faint-focus-color: #2563eb22;
+}
+
+.root-pane {
+    -fx-background-color: #f4f6fb;
+}
+
+/* ---------- Cabecera ---------- */
+.header {
+    -fx-background-color: #1f2a44;
+    -fx-padding: 14 28;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 8, 0, 0, 2);
+}
+
+.brand-mark {
+    -fx-background-color: #2563eb;
+    -fx-background-radius: 10;
+    -fx-min-width: 42;
+    -fx-pref-width: 42;
+    -fx-max-width: 42;
+    -fx-min-height: 42;
+    -fx-pref-height: 42;
+    -fx-max-height: 42;
+}
+
+.brand-letter {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+.header-title {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+
+.content-area {
+    -fx-background-color: #f4f6fb;
+}
+
+.header-spacer:hover { -fx-background-color: transparent; }
+
+/* ---------- Pantallas generales ---------- */
+.screen {
+    -fx-padding: 32;
+}
+
+.title {
+    -fx-font-size: 34px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1f2a44;
+}
+
+.subtitle {
+    -fx-font-size: 20px;
+    -fx-text-fill: #46536f;
+}
+
+.section-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1f2a44;
+}
+
+/* ---------- Iconos vectoriales ---------- */
+.icon-svg {
+    -fx-fill: #2563eb;
+}
+
+.icon-stroke {
+    -fx-fill: transparent;
+    -fx-stroke: #2563eb;
+    -fx-stroke-width: 1.6;
+}
+
+.icon-inverse {
+    -fx-fill: #ffffff;
+}
+
+.icon-stage {
+    -fx-background-color: #e8eefc;
+    -fx-background-radius: 44;
+    -fx-alignment: center;
+    -fx-min-width: 72;
+    -fx-pref-width: 72;
+    -fx-max-width: 72;
+    -fx-min-height: 72;
+    -fx-pref-height: 72;
+    -fx-max-height: 72;
+}
+
+.icon-stage-lg {
+    -fx-background-color: #e8eefc;
+    -fx-background-radius: 56;
+    -fx-alignment: center;
+    -fx-min-width: 104;
+    -fx-pref-width: 104;
+    -fx-max-width: 104;
+    -fx-min-height: 104;
+    -fx-pref-height: 104;
+    -fx-max-height: 104;
+}
+
+.icon-stage-lg .icon-svg {
+    -fx-fill: #2563eb;
+}
+
+/* ---------- Tarjetas ---------- */
+.card {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 16;
+    -fx-padding: 32;
+    -fx-effect: dropshadow(gaussian, rgba(31,42,68,0.12), 18, 0, 0, 6);
+}
+
+.card-title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1f2a44;
+}
+
+/* ---------- Estados de escaneo ---------- */
+.status-waiting {
+    -fx-text-fill: #1d7a3d;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.status-error {
+    -fx-text-fill: #c0392b;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+/* ---------- Detalle / montos ---------- */
+.ticket-code {
+    -fx-font-size: 32px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1f2a44;
+    -fx-letter-spacing: 1px;
+}
+
+.detail-box {
+    -fx-background-color: #eef2fa;
+    -fx-background-radius: 12;
+    -fx-padding: 16 24;
+}
+
+.detail-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #46536f;
+}
+
+.detail-value {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1f2a44;
+}
+
+.amount-big {
+    -fx-font-size: 48px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1d7a3d;
+}
+
+.amount-mid {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1f2a44;
+}
+
+.amount-usd {
+    -fx-font-size: 16px;
+    -fx-text-fill: #46536f;
+}
+
+/* ---------- Botones ---------- */
+.button {
+    -fx-background-radius: 10;
+    -fx-cursor: hand;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-padding: 12 22;
+}
+
+.button-primary {
+    -fx-background-color: #2563eb;
+    -fx-text-fill: #ffffff;
+}
+
+.button-primary:hover {
+    -fx-background-color: #1d4ed8;
+}
+
+.button-primary:pressed {
+    -fx-background-color: #1e40af;
+}
+
+.button-primary:disabled {
+    -fx-opacity: 0.6;
+}
+
+.button-secondary {
+    -fx-background-color: #e5e9f2;
+    -fx-text-fill: #1f2a44;
+}
+
+.button-secondary:hover {
+    -fx-background-color: #d3daea;
+}
+
+.button-secondary:pressed {
+    -fx-background-color: #c6cfdf;
+}
+
+.button-lg {
+    -fx-font-size: 20px;
+    -fx-padding: 16 36;
+}
+
+.header-button {
+    -fx-background-color: rgba(255,255,255,0.15);
+    -fx-text-fill: #ffffff;
+}
+
+.header-button:hover {
+    -fx-background-color: rgba(255,255,255,0.26);
+}
+
+.header-button:pressed {
+    -fx-background-color: rgba(255,255,255,0.34);
+}
+
+/* ---------- Tarjetas de método de pago ---------- */
+.method-card {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 16;
+    -fx-padding: 28 40;
+    -fx-min-width: 200;
+    -fx-min-height: 150;
+    -fx-cursor: hand;
+    -fx-border-color: transparent;
+    -fx-border-width: 2;
+    -fx-border-radius: 16;
+    -fx-effect: dropshadow(gaussian, rgba(31,42,68,0.10), 14, 0, 0, 4);
+}
+
+.method-card:hover {
+    -fx-background-color: #eef2ff;
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+}
+
+.method-card:pressed {
+    -fx-background-color: #dbe4fd;
+    -fx-scale-x: 0.99;
+    -fx-scale-y: 0.99;
+}
+
+.method-card:focused {
+    -fx-border-color: #2563eb;
+}
+
+.method-icon-stage {
+    -fx-background-color: #e8eefc;
+    -fx-background-radius: 24;
+    -fx-min-width: 48;
+    -fx-pref-width: 48;
+    -fx-max-width: 48;
+    -fx-min-height: 48;
+    -fx-pref-height: 48;
+    -fx-max-height: 48;
+}
+
+.method-title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1f2a44;
+}
+
+.method-sub {
+    -fx-font-size: 14px;
+    -fx-text-fill: #46536f;
+}
+
+/* ---------- Formularios ---------- */
+.form-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #1f2a44;
+    -fx-font-weight: bold;
+}
+
+.form-hint {
+    -fx-font-size: 14px;
+    -fx-text-fill: #56637f;
+}
+
+.mock-target {
+    -fx-background-color: #e8eefc;
+    -fx-background-radius: 10;
+    -fx-padding: 12 16;
+    -fx-alignment: center-left;
+    -fx-max-width: 360;
+}
+
+.mock-row {
+    -fx-font-size: 14px;
+    -fx-text-fill: #1f2a44;
+    -fx-font-weight: bold;
+}
+
+.text-field {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cfd7e6;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 10 12;
+    -fx-font-size: 16px;
+    -fx-highlight-fill: #dbe6ff;
+    -fx-highlight-text-fill: #1f2a44;
+}
+
+.text-field:focused {
+    -fx-border-color: #2563eb;
+    -fx-border-width: 2;
+    -fx-padding: 9 11;
+}
+
+.manual-input {
+    -fx-font-size: 18px;
+}
+
+.combo-box {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #cfd7e6;
+    -fx-border-radius: 8;
+    -fx-font-size: 15px;
+}
+
+/* ---------- Carga ---------- */
+.progress-bar {
+    -fx-accent: #2563eb;
+    -fx-background-insets: 0;
+}
+
+.progress-indicator {
+    -fx-progress-color: #2563eb;
+}
+
+/* ---------- Panel administración ---------- */
+.stat-card {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 14;
+    -fx-padding: 22 30;
+    -fx-min-width: 180;
+    -fx-effect: dropshadow(gaussian, rgba(31,42,68,0.08), 12, 0, 0, 3);
+}
+
+.stat-value {
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1f2a44;
+}
+
+.stat-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #46536f;
+}
+
+.option-card {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 16;
+    -fx-padding: 24 30;
+    -fx-min-width: 210;
+    -fx-cursor: hand;
+    -fx-border-color: transparent;
+    -fx-border-width: 2;
+    -fx-border-radius: 16;
+    -fx-effect: dropshadow(gaussian, rgba(31,42,68,0.10), 14, 0, 0, 4);
+}
+
+.option-card:hover {
+    -fx-background-color: #eef2ff;
+}
+
+.option-card:pressed {
+    -fx-background-color: #dbe4fd;
+}
+
+.option-card:focused {
+    -fx-border-color: #2563eb;
+}
+
+.option-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #1f2a44;
+}
+
+/* ---------- Tablas ---------- */
+.data-table {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 10;
+    -fx-border-color: #e2e7f0;
+    -fx-border-radius: 10;
+}
+
+.data-table .column-header-background {
+    -fx-background-color: #f0f3fa;
+    -fx-background-radius: 10 10 0 0;
+}
+
+.data-table .column-header,
+.data-table .filler {
+    -fx-background-color: transparent;
+}
+
+.data-table .column-header .label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #1f2a44;
+}
+
+.data-table .table-row-cell:odd {
+    -fx-background-color: #f8fafd;
+}
+
+.data-table .table-row-cell:selected {
+    -fx-background-color: #dbe4fd;
+}
+
+.data-table .table-row-cell:selected .table-cell {
+    -fx-text-fill: #1f2a44;
+}
+
+.empty-state {
+    -fx-text-fill: #56637f;
+    -fx-font-size: 15px;
+}
+
+/* ---------- Varios ---------- */
+.success-badge {
+    -fx-background-color: #dcfce7;
+    -fx-text-fill: #166534;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 26;
+    -fx-padding: 14 28;
+}
+
+.success-badge .icon-svg {
+    -fx-fill: #166534;
+}
+
+/* ============================================================
+   Indicador de pasos del kiosco (1 Ticket → 4 Comprobante)
+   ============================================================ */
+.steps {
+    -fx-padding: 6 0 2 0;
+}
+
+.step {
+    -fx-min-width: 150;
+}
+
+.step-circle {
+    -fx-background-radius: 23;
+    -fx-min-width: 46;
+    -fx-pref-width: 46;
+    -fx-max-width: 46;
+    -fx-min-height: 46;
+    -fx-pref-height: 46;
+    -fx-max-height: 46;
+    -fx-alignment: center;
+    -fx-font-size: 19px;
+    -fx-font-weight: bold;
+}
+
+.step-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.step-active .step-circle {
+    -fx-background-color: #2563eb;
+    -fx-text-fill: #ffffff;
+}
+
+.step-active .step-label {
+    -fx-text-fill: #2563eb;
+}
+
+.step-done .step-circle {
+    -fx-background-color: #1d7a3d;
+    -fx-text-fill: #ffffff;
+}
+
+.step-done .step-label {
+    -fx-text-fill: #1d7a3d;
+}
+
+.step-upcoming .step-circle {
+    -fx-background-color: #e5e9f2;
+    -fx-text-fill: #46536f;
+}
+
+.step-upcoming .step-label {
+    -fx-text-fill: #56637f;
+}
+
+/* ============================================================
+   Ventana de administración (interfaz separada)
+   ============================================================ */
+.admin-shell {
+    -fx-background-color: #eef1f8;
+}
+
+.admin-sidebar {
+    -fx-background-color: #1f2a44;
+    -fx-padding: 22 14;
+    -fx-min-width: 250;
+    -fx-pref-width: 250;
+    -fx-max-width: 250;
+}
+
+.sidebar-brand {
+    -fx-padding: 0 4 14 4;
+}
+
+.sidebar-title {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.sidebar-subtitle {
+    -fx-text-fill: rgba(255,255,255,0.65);
+    -fx-font-size: 13px;
+}
+
+.nav-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 10;
+    -fx-text-fill: #cdd7ea;
+    -fx-alignment: center-left;
+    -fx-padding: 16 16;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-background-insets: 0;
+}
+
+.nav-button:hover {
+    -fx-background-color: rgba(255,255,255,0.10);
+}
+
+.nav-button:selected {
+    -fx-background-color: #2563eb;
+    -fx-text-fill: #ffffff;
+}
+
+.nav-button:disabled {
+    -fx-opacity: 0.55;
+}
+
+.admin-sidebar .icon-svg {
+    -fx-fill: #cdd7ea;
+}
+
+.nav-button:selected .icon-svg {
+    -fx-fill: #ffffff;
+}
+
+.nav-logout {
+    -fx-background-color: rgba(240,82,66,0.18);
+    -fx-text-fill: #f3a79f;
+}
+
+.nav-logout:hover {
+    -fx-background-color: rgba(240,82,66,0.28);
+}
+
+.session-box {
+    -fx-padding: 8 4;
+}
+
+.sidebar-user {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.sidebar-hint {
+    -fx-text-fill: rgba(255,255,255,0.65);
+    -fx-font-size: 12px;
+    -fx-wrap-text: true;
+}
+
+.admin-content {
+    -fx-padding: 24;
+}
+
+/* ---------- Pantallas admin (contenido dentro del shell) ---------- */
+.screen.admin {
+    -fx-padding: 8 4;
+}
+
+.login-card {
+    -fx-padding: 44 40;
+}
+
+.lock-stage {
+    -fx-background-color: #e8eefc;
+    -fx-background-radius: 44;
+    -fx-alignment: center;
+    -fx-min-width: 88;
+    -fx-pref-width: 88;
+    -fx-max-width: 88;
+    -fx-min-height: 88;
+    -fx-pref-height: 88;
+    -fx-max-height: 88;
+}
+
+.login-screen {
+    -fx-background-color: #eef1f8;
+}
+
+/* ---------- Feedback de guardado ---------- */
+.feedback-ok {
+    -fx-text-fill: #1d7a3d;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 4 0 2 0;
+}
+
+.feedback-error {
+    -fx-text-fill: #c0392b;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-padding: 4 0 2 0;
+}
+
+/* ============================================================
+   Ajustes de pantalla táctil (tablet Windows/Linux)
+   ============================================================ */
+.button {
+    -fx-min-height: 46;
+}
+
+.button-lg {
+    -fx-min-height: 58;
+}
+
+.text-field {
+    -fx-min-height: 46;
+}
+
+.password-field {
+    -fx-min-height: 46;
+}
+
+.combo-box {
+    -fx-min-height: 44;
+    -fx-font-size: 16px;
+}
+
+.combo-box .list-cell {
+    -fx-padding: 10 12;
+}
+
+.check-box {
+    -fx-font-size: 16px;
+    -fx-text-fill: #1f2a44;
+    -fx-padding: 6 0;
+}
+
+.data-table {
+    -fx-font-size: 15px;
+}
+
+.data-table .table-row-cell {
+    -fx-cell-size: 40px;
+}

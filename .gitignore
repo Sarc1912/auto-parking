@@ -1,0 +1,20 @@
+# Build
+target/
+*.class
+
+# Base de datos embebida
+data/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.settings/
+.classpath
+.project
+.agent
+.gemini/
+.opencode/
+
+# Sistema
+*.log

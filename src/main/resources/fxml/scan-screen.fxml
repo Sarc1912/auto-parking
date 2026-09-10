@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="scanRoot" xmlns:fx="http://javafx.com/fxml/1"
+       fx:controller="com.autopay.parking.ui.controller.ScanScreenController"
+       styleClass="screen" spacing="24" alignment="CENTER" focusTraversable="true">
+    <HBox fx:id="stepsBox" alignment="CENTER"/>
+    <VBox styleClass="card" alignment="CENTER" spacing="20" maxWidth="720">
+        <StackPane fx:id="scanIconBox" styleClass="icon-stage-lg"/>
+        <Label styleClass="title" text="Escanee su ticket"/>
+        <Label styleClass="subtitle" text="Acerca el código de barras o QR al escáner"/>
+        <Label fx:id="statusLabel" styleClass="status-waiting" text="LISTO — espere la lectura"/>
+        <Label fx:id="detailsLabel" styleClass="status-error" wrapText="true" text=""/>
+        <Label styleClass="form-hint" text="Ingreso manual del código (opcional):"/>
+        <HBox spacing="12" alignment="CENTER">
+            <TextField fx:id="manualCodeField" promptText="Ej: TKT-100001"
+                       styleClass="manual-input" prefWidth="260"/>
+            <Button styleClass="button-primary" text="Buscar"
+                    fx:id="manualSearchButton" onAction="#onManualSearch"/>
+        </HBox>
+    </VBox>
+</VBox>

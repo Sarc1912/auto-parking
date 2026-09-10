@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administración · Autopago Estacionamiento</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app-shell">
+
+    <!-- ============ LOGIN ============ -->
+    <section id="login-view" class="login-view hidden">
+        <form class="login-card" id="login-form" novalidate>
+            <div class="login-logo">
+                <svg viewBox="0 0 24 24" class="icon" aria-hidden="true">
+                    <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+                </svg>
+            </div>
+            <h1 class="card-title">Panel de administración</h1>
+            <p class="subtitle">Ingrese su usuario y contraseña para acceder.</p>
+
+            <div class="field">
+                <label for="login-user">Usuario</label>
+                <input id="login-user" type="text" autocomplete="username" placeholder="Usuario" autofocus>
+            </div>
+            <div class="field">
+                <label for="login-pass">Contraseña</label>
+                <input id="login-pass" type="password" autocomplete="current-password" placeholder="Contraseña">
+            </div>
+
+            <p id="login-error" class="msg-error" role="alert" hidden></p>
+
+            <button class="btn btn-primary btn-block" type="submit">Iniciar sesión</button>
+            <p class="hint">Cuenta de demostración: <code>admin</code> / <code>admin123</code></p>
+        </form>
+    </section>
+
+    <!-- ============ PANEL ============ -->
+    <section id="app-view" class="admin-view hidden">
+
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <span class="brand-mark">P</span>
+                <div>
+                    <p class="brand-title">Autopago</p>
+                    <p class="brand-sub">Administración</p>
+                </div>
+            </div>
+
+            <nav class="nav" aria-label="Secciones">
+                <button class="nav-btn active" data-view="resumen">
+                    <svg viewBox="0 0 24 24" class="icon" aria-hidden="true">
+                        <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
+                    </svg>
+                    Resumen
+                </button>
+                <button class="nav-btn" data-view="tickets">
+                    <svg viewBox="0 0 24 24" class="icon" aria-hidden="true">
+                        <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+                    </svg>
+                    Tickets
+                </button>
+                <button class="nav-btn" data-view="tarifas">
+                    <svg viewBox="0 0 24 24" class="icon" aria-hidden="true">
+                        <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/>
+                    </svg>
+                    Tarifas y tasa
+                </button>
+                <button class="nav-btn" data-view="reportes">
+                    <svg viewBox="0 0 24 24" class="icon" aria-hidden="true">
+                        <path d="M5 9.2h3V19H5V9.2zM10.6 5h2.8v14h-2.8V5zm5.6 8H19v6h-2.8v-6z"/>
+                    </svg>
+                    Reportes
+                </button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <p class="user-name" id="user-name">—</p>
+                <p class="user-hint">Sesión activa</p>
+                <button class="nav-btn logout-btn" id="logout-btn">
+                    <svg viewBox="0 0 24 24" class="icon" aria-hidden="true">
+                        <path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/>
+                    </svg>
+                    Cerrar sesión
+                </button>
+            </div>
+        </aside>
+
+        <main class="content">
+
+            <!-- Resumen -->
+            <section class="view active" id="view-resumen">
+                <h1 class="page-title">Resumen general</h1>
+                <div class="cards">
+                    <article class="card stat">
+                        <p class="stat-value" id="stat-active">—</p>
+                        <p class="stat-label">Tickets activos</p>
+                    </article>
+                    <article class="card stat">
+                        <p class="stat-value" id="stat-paid">—</p>
+                        <p class="stat-label">Tickets pagados</p>
+                    </article>
+                    <article class="card stat">
+                        <p class="stat-value" id="stat-payments">—</p>
+                        <p class="stat-label">Pagos registrados</p>
+                    </article>
+                    <article class="card stat">
+                        <p class="stat-value" id="stat-today">—</p>
+                        <p class="stat-label">Pagos de hoy</p>
+                    </article>
+                    <article class="card stat stat-collected">
+                        <p class="stat-value accent" id="stat-collected">—</p>
+                        <p class="stat-label">Total recaudado</p>
+                    </article>
+                </div>
+                <div class="cards">
+                    <article class="card rate-card">
+                        <p class="detail-label">Tasa BCV activa</p>
+                        <p class="rate-value" id="rate-bcv">—</p>
+                    </article>
+                    <article class="card rate-card">
+                        <p class="detail-label">Tasa paralela</p>
+                        <p class="rate-value" id="rate-parallel">—</p>
+                    </article>
+                    <article class="card rate-card">
+                        <p class="detail-label">Sugerencia</p>
+                        <p class="rate-hint">Edite la tasa en "Tarifas y tasa".</p>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Tarifas -->
+            <section class="view" id="view-tarifas">
+                <h1 class="page-title">Tarifas y tasa de cambio</h1>
+                <p class="feedback hidden" id="tariff-feedback" role="status"></p>
+
+                <article class="card">
+                    <h2 class="section-title">Tarifas configuradas</h2>
+                    <div class="table-wrap">
+                        <table class="data-table">
+                            <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Bs/h</th>
+                                <th>Mín. min</th>
+                                <th>Tope/día</th>
+                                <th>Activa</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody id="tariffs-body"></tbody>
+                        </table>
+                    </div>
+                </article>
+
+                <div class="cards">
+                    <article class="card form-card">
+                        <h2 class="section-title" id="tariff-form-title">Agregar tarifa</h2>
+                        <input type="hidden" id="tf-id">
+                        <div class="field">
+                            <label for="tf-name">Nombre</label>
+                            <input id="tf-name" type="text" placeholder="Ej: Tarifa Estándar">
+                        </div>
+                        <div class="field-row">
+                            <div class="field">
+                                <label for="tf-rate">Bs/h</label>
+                                <input id="tf-rate" type="text" inputmode="decimal" placeholder="2.00">
+                            </div>
+                            <div class="field">
+                                <label for="tf-min">Mín. minutos</label>
+                                <input id="tf-min" type="text" inputmode="numeric" placeholder="30">
+                            </div>
+                            <div class="field">
+                                <label for="tf-max">Tope diario (Bs)</label>
+                                <input id="tf-max" type="text" inputmode="decimal" placeholder="Opcional">
+                            </div>
+                        </div>
+                        <label class="check">
+                            <input id="tf-active" type="checkbox" checked>
+                            <span>Activa (la usa el kiosco de inmediato)</span>
+                        </label>
+                        <div class="row">
+                            <button class="btn btn-secondary" id="tf-cancel" hidden>Cancelar</button>
+                            <button class="btn btn-primary" id="tf-save">Guardar tarifa</button>
+                        </div>
+                    </article>
+
+                    <article class="card form-card">
+                        <h2 class="section-title">Tasa de cambio</h2>
+                        <div class="field-row">
+                            <div class="field">
+                                <label for="rate-bcv-input">BCV (Bs/USD)</label>
+                                <input id="rate-bcv-input" type="text" inputmode="decimal" placeholder="36.50">
+                            </div>
+                            <div class="field">
+                                <label for="rate-parallel-input">Paralela (Bs/USD)</label>
+                                <input id="rate-parallel-input" type="text" inputmode="decimal" placeholder="Opcional">
+                            </div>
+                        </div>
+                        <p class="hint">La tasa guardada entra en vigor de inmediato en el kiosco.</p>
+                        <button class="btn btn-primary" id="rate-save">Guardar tasa</button>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Tickets -->
+            <section class="view" id="view-tickets">
+                <div class="row between">
+                    <h1 class="page-title">Tickets del sistema</h1>
+                    <button class="btn btn-secondary" id="tickets-refresh">Actualizar</button>
+                </div>
+                <div class="cards">
+                    <article class="card stat">
+                        <p class="stat-value" id="tk-total">—</p>
+                        <p class="stat-label">Tickets totales</p>
+                    </article>
+                    <article class="card stat">
+                        <p class="stat-value" id="tk-active">—</p>
+                        <p class="stat-label">Activos</p>
+                    </article>
+                    <article class="card stat">
+                        <p class="stat-value" id="tk-paid">—</p>
+                        <p class="stat-label">Pagados</p>
+                    </article>
+                    <article class="card stat">
+                        <p class="stat-value" id="tk-cancelled">—</p>
+                        <p class="stat-label">Cancelados</p>
+                    </article>
+                </div>
+                <article class="card">
+                    <h2 class="section-title">Todos los tickets</h2>
+                    <div class="table-wrap">
+                        <table class="data-table">
+                            <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Entrada</th>
+                                <th>Salida</th>
+                                <th>Placa</th>
+                                <th>Monto</th>
+                                <th>Estado</th>
+                                <th>Método de pago</th>
+                                <th>Pago</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tickets-body"></tbody>
+                        </table>
+                        <p class="empty" id="tickets-empty" hidden>Todavía no hay tickets registrados.</p>
+                    </div>
+                </article>
+            </section>
+
+            <!-- Reportes -->
+            <section class="view" id="view-reportes">
+                <div class="row between">
+                    <h1 class="page-title">Reporte de transacciones</h1>
+                    <button class="btn btn-secondary" id="reports-refresh">Actualizar</button>
+                </div>
+                <div class="cards">
+                    <article class="card rate-card">
+                        <p class="detail-label">Total recaudado</p>
+                        <p class="rate-value" id="report-total">—</p>
+                    </article>
+                    <article class="card rate-card">
+                        <p class="detail-label">Pagos registrados</p>
+                        <p class="rate-value" id="report-count">—</p>
+                    </article>
+                </div>
+                <article class="card">
+                    <h2 class="section-title">Historial de pagos</h2>
+                    <div class="table-wrap">
+                        <table class="data-table">
+                            <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Ticket</th>
+                                <th>Método</th>
+                                <th>Monto</th>
+                                <th>Estado</th>
+                            </tr>
+                            </thead>
+                            <tbody id="reports-body"></tbody>
+                        </table>
+                        <p class="empty" id="reports-empty" hidden>Todavía no hay transacciones registradas.</p>
+                    </div>
+                </article>
+            </section>
+
+        </main>
+    </section>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

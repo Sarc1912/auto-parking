@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<StackPane fx:id="paymentRoot" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.autopay.parking.ui.controller.PaymentScreenController"
+           styleClass="screen" alignment="TOP_CENTER">
+    <VBox spacing="20" alignment="TOP_CENTER" styleClass="payment-wrapper">
+
+        <!-- Indicador de pasos -->
+        <HBox fx:id="stepsBox" alignment="CENTER"/>
+
+        <!-- Resumen del monto -->
+        <Label styleClass="title" text="Seleccione el método de pago"/>
+        <Label fx:id="amountLabel" styleClass="amount-big" text="—"/>
+        <Label fx:id="amountUsdLabel" styleClass="amount-usd" text="—"/>
+
+        <!-- Cuadrícula de métodos -->
+        <VBox fx:id="methodGridPane" spacing="16" alignment="CENTER" maxWidth="760">
+            <HBox spacing="16" alignment="CENTER">
+                <VBox styleClass="method-card" alignment="CENTER" spacing="10"
+                      focusTraversable="true" onMouseClicked="#onPagoMovilClicked"
+                      onKeyPressed="#onPagoMovilKey">
+                    <StackPane fx:id="movilIconBox" styleClass="method-icon-stage"/>
+                    <Label styleClass="method-title" text="Pago Móvil"/>
+                    <Label styleClass="method-sub" text="Interbancario"/>
+                </VBox>
+                <VBox styleClass="method-card" alignment="CENTER" spacing="10"
+                      focusTraversable="true" onMouseClicked="#onCardPosClicked"
+                      onKeyPressed="#onCardPosKey">
+                    <StackPane fx:id="posIconBox" styleClass="method-icon-stage"/>
+                    <Label styleClass="method-title" text="Punto de Venta"/>
+                    <Label styleClass="method-sub" text="Débito y crédito"/>
+                </VBox>
+            </HBox>
+            <HBox spacing="16" alignment="CENTER">
+                <VBox styleClass="method-card" alignment="CENTER" spacing="10"
+                      focusTraversable="true" onMouseClicked="#onCashVesClicked"
+                      onKeyPressed="#onCashVesKey">
+                    <StackPane fx:id="cashVesIconBox" styleClass="method-icon-stage"/>
+                    <Label styleClass="method-title" text="Efectivo Bs"/>
+                    <Label styleClass="method-sub" text="Bolívares"/>
+                </VBox>
+                <VBox styleClass="method-card" alignment="CENTER" spacing="10"
+                      focusTraversable="true" onMouseClicked="#onCashUsdClicked"
+                      onKeyPressed="#onCashUsdKey">
+                    <StackPane fx:id="cashUsdIconBox" styleClass="method-icon-stage"/>
+                    <Label styleClass="method-title" text="Efectivo USD"/>
+                    <Label styleClass="method-sub" text="Dólares"/>
+                </VBox>
+            </HBox>
+            <Label styleClass="form-hint" text="Zelle y Binance Pay próximamente"/>
+            <Button styleClass="button-secondary" text="Volver" onAction="#onBackClicked"/>
+        </VBox>
+
+        <!-- Formulario del método seleccionado -->
+        <VBox fx:id="methodFormPane" visible="false" spacing="16" alignment="CENTER"
+              maxWidth="560" styleClass="card">
+            <Label styleClass="card-title" fx:id="formTitleLabel" text="—"/>
+            <Label styleClass="detail-label" text="Monto a pagar"/>
+            <Label fx:id="formAmountLabel" styleClass="amount-mid" text="—"/>
+            <VBox fx:id="formFieldsBox" spacing="10" alignment="CENTER"/>
+            <StackPane visible="false" fx:id="processingBox" alignment="CENTER">
+                <VBox spacing="10" alignment="CENTER">
+                    <ProgressIndicator prefWidth="44" prefHeight="44"/>
+                    <Label styleClass="status-waiting" text="Procesando pago…"/>
+                </VBox>
+            </StackPane>
+            <HBox spacing="16" alignment="CENTER">
+                <Button styleClass="button-secondary" text="Atrás" onAction="#onCancelForm"/>
+                <Button fx:id="confirmPaymentButton" styleClass="button-primary button-lg"
+                        text="Confirmar pago" onAction="#onConfirmPayment"/>
+            </HBox>
+        </VBox>
+
+        <Region VBox.vgrow="ALWAYS" minHeight="1"/>
+    </VBox>
+</StackPane>
