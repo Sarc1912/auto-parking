@@ -11,4 +11,8 @@ public interface AppScreen {
 
     /** Invocado cuando la pantalla pasa a ser visible. */
     void onShown(Object context);
+
+    /** Invocado antes de reemplazar la pantalla: detener temporizadores y animaciones. */
+    default void onHidden() {
+    }
 }

@@ -1,27 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.autopay.parking.ui.util.IconView?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.autopay.parking.ui.controller.MainController"
             styleClass="root-pane">
     <top>
-        <HBox styleClass="header" alignment="CENTER_LEFT" spacing="16">
+        <HBox styleClass="header" alignment="CENTER_LEFT" spacing="14">
             <StackPane styleClass="brand-mark">
-                <Label styleClass="brand-letter" text="P"/>
+                <IconView icon="PARKING" size="28"/>
             </StackPane>
-            <Label styleClass="header-title" text="Autopago Estacionamiento"/>
-            <HBox HBox.hgrow="ALWAYS" styleClass="header-spacer"/>
-            <Button styleClass="button-secondary header-button"
-                    text="Administración web"
-                    onAction="#onAdminClicked"/>
+            <VBox alignment="CENTER_LEFT" spacing="1">
+                <Label styleClass="header-title" text="Autopago Estacionamiento"/>
+                <Label styleClass="header-subtitle" text="Pague su ticket en cuatro pasos"/>
+            </VBox>
+            <Region HBox.hgrow="ALWAYS"/>
+            <VBox alignment="CENTER_RIGHT" spacing="1">
+                <Label fx:id="clockLabel" styleClass="header-clock" text="--:--"/>
+                <Label fx:id="dateLabel" styleClass="header-date" text=""/>
+            </VBox>
+            <Button fx:id="settingsButton" styleClass="header-icon-button" onAction="#onSettingsClicked"
+                    accessibleText="Opciones">
+                <graphic>
+                    <IconView icon="SETTINGS" size="22"/>
+                </graphic>
+                <tooltip>
+                    <Tooltip text="Opciones"/>
+                </tooltip>
+            </Button>
         </HBox>
     </top>
     <center>
-        <StackPane fx:id="contentArea" styleClass="content-area"/>
+        <StackPane>
+            <StackPane fx:id="contentArea" styleClass="content-area"/>
+
+            <!-- Aviso de inactividad: se superpone a cualquier pantalla del flujo -->
+            <StackPane fx:id="idleOverlay" styleClass="overlay" visible="false">
+                <VBox styleClass="card, dialog-card" alignment="CENTER" spacing="16"
+                      maxWidth="580" maxHeight="-Infinity">
+                    <StackPane styleClass="icon-stage, icon-stage-warning">
+                        <IconView icon="CLOCK" size="40"/>
+                    </StackPane>
+                    <Label styleClass="card-title" text="¿Sigue ahí?"/>
+                    <Label fx:id="idleMessageLabel" styleClass="subtitle" wrapText="true"
+                           textAlignment="CENTER" minHeight="-Infinity" text=""/>
+                    <HBox spacing="14" alignment="CENTER">
+                        <Button styleClass="button-secondary, button-lg" text="Empezar de nuevo"
+                                onAction="#onIdleRestart" minWidth="-Infinity">
+                            <graphic>
+                                <IconView icon="HOME" size="20"/>
+                            </graphic>
+                        </Button>
+                        <Button fx:id="idleContinueButton" styleClass="button-primary, button-lg"
+                                text="Sí, continuar" onAction="#onIdleContinue" minWidth="-Infinity">
+                            <graphic>
+                                <IconView icon="CHECK" size="22"/>
+                            </graphic>
+                        </Button>
+                    </HBox>
+                </VBox>
+            </StackPane>
+        </StackPane>
     </center>
+    <bottom>
+        <HBox styleClass="footer" alignment="CENTER" spacing="10">
+            <IconView icon="HELP" size="18"/>
+            <Label styleClass="footer-text"
+                   text="¿Necesita ayuda? Diríjase a la taquilla o llame al personal del estacionamiento."/>
+        </HBox>
+    </bottom>
 </BorderPane>
