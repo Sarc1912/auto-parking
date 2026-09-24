@@ -10,6 +10,7 @@ import com.autopay.parking.ui.ViewNavigator;
 import com.autopay.parking.ui.util.FormatUtil;
 import com.autopay.parking.ui.util.IconView;
 import com.autopay.parking.ui.util.Icons;
+import com.autopay.parking.ui.util.PaymentFormValidation;
 import com.autopay.parking.ui.util.StepIndicator;
 import javafx.animation.Animation;
 import javafx.animation.Interpolator;
@@ -47,7 +48,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.BooleanSupplier;
 import java.util.function.UnaryOperator;
-import java.util.regex.Pattern;
 
 /**
  * Pantalla de selección de método de pago (mockup adaptado al contexto
@@ -70,10 +70,6 @@ public class PaymentScreenController implements AppScreen {
     private static final String MERCHANT_BANK = "BBVA Provincial (0108)";
     private static final String MERCHANT_PHONE = "0412-1234567";
     private static final String MERCHANT_ID = "J-12345678-9";
-
-    private static final Pattern CEDULA = Pattern.compile("^[VEJ]-?\\d{6,9}$");
-    private static final Pattern PHONE = Pattern.compile("^04\\d{2}-?\\d{7}$");
-    private static final Pattern REFERENCE = Pattern.compile("^\\d{6}$");
 
     private static final int[] USD_BILLS = {1, 5, 10, 20, 50, 100};
     private static final int[] VES_ROUNDING = {10, 50, 100, 500, 1000};
@@ -246,9 +242,9 @@ public class PaymentScreenController implements AppScreen {
         TextField phone = textField("0412-1234567", charFilter("[0-9-]", 12));
         TextField reference = textField("6 últimos dígitos", charFilter("[0-9]", 6));
 
-        watch(cedula, () -> CEDULA.matcher(cedula.getText()).matches());
-        watch(phone, () -> PHONE.matcher(phone.getText()).matches());
-        watch(reference, () -> REFERENCE.matcher(reference.getText()).matches());
+        watch(cedula, () -> PaymentFormValidation.isCedula(cedula.getText()));
+        watch(phone, () -> PaymentFormValidation.isPhone(phone.getText()));
+        watch(reference, () -> PaymentFormValidation.isReference(reference.getText()));
         bank.valueProperty().addListener((o, a, b) -> refreshValidity());
 
         VBox fields = new VBox(12,
@@ -260,10 +256,8 @@ public class PaymentScreenController implements AppScreen {
 
         formFieldsBox.getChildren().add(twoColumns(merchant, fields));
 
-        formValid = () -> bank.getValue() != null
-                && CEDULA.matcher(cedula.getText()).matches()
-                && PHONE.matcher(phone.getText()).matches()
-                && REFERENCE.matcher(reference.getText()).matches();
+        formValid = () -> PaymentFormValidation.isMobilePayValid(
+                bank.getValue(), cedula.getText(), phone.getText(), reference.getText());
         invalidHint = "Complete todos los datos del Pago Móvil para continuar.";
         Platform.runLater(bank::requestFocus);
     }
@@ -280,7 +274,7 @@ public class PaymentScreenController implements AppScreen {
         StackPane segmented = segmentedControl("Corriente", "Ahorro");
 
         TextField cedula = textField("V-12345678", upperFilter("[VEJvej0-9-]", 11));
-        watch(cedula, () -> CEDULA.matcher(cedula.getText()).matches());
+        watch(cedula, () -> PaymentFormValidation.isCedula(cedula.getText()));
 
         VBox fields = new VBox(12,
                 field("Tipo de cuenta", segmented, null),
@@ -289,7 +283,7 @@ public class PaymentScreenController implements AppScreen {
 
         formFieldsBox.getChildren().add(twoColumns(steps, fields));
 
-        formValid = () -> CEDULA.matcher(cedula.getText()).matches();
+        formValid = () -> PaymentFormValidation.isCardPosValid(cedula.getText());
         invalidHint = "Ingrese la cédula del titular de la tarjeta.";
         Platform.runLater(cedula::requestFocus);
     }
@@ -328,7 +322,7 @@ public class PaymentScreenController implements AppScreen {
         }
 
         received.textProperty().addListener((obs, o, n) -> {
-            BigDecimal value = parseAmount(n);
+            BigDecimal value = PaymentFormValidation.parseAmount(n);
             receivedValue.setText(money(value, usd));
             changeRow.getStyleClass().removeAll("summary-ok", "summary-missing");
             if (value.signum() == 0) {
@@ -353,7 +347,7 @@ public class PaymentScreenController implements AppScreen {
 
         formFieldsBox.getChildren().add(twoColumns(summary, fields));
 
-        formValid = () -> parseAmount(received.getText()).compareTo(due) >= 0;
+        formValid = () -> PaymentFormValidation.coversAmount(received.getText(), due);
         invalidHint = "El monto recibido debe cubrir el total a pagar.";
         Platform.runLater(received::requestFocus);
     }
@@ -513,15 +507,6 @@ public class PaymentScreenController implements AppScreen {
             change.setText(change.getText().replace(',', '.'));
             return change.getControlNewText().matches("\\d{0,7}(\\.\\d{0,2})?") ? change : null;
         };
-    }
-
-    private static BigDecimal parseAmount(String text) {
-        try {
-            return text == null || text.isBlank() || text.equals(".")
-                    ? BigDecimal.ZERO : new BigDecimal(text);
-        } catch (NumberFormatException e) {
-            return BigDecimal.ZERO;
-        }
     }
 
     private static VBox field(String label, Node control, String helper) {
