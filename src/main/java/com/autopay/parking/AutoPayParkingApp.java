@@ -1,15 +1,17 @@
 package com.autopay.parking;
 
-import com.autopay.parking.config.AppConfig;
+import com.autopay.parking.ui.ViewNavigator;
+import com.autopay.parking.ui.util.ScaledRoot;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.scene.layout.Region;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-
 /**
  * Punto de entrada de la aplicación.
  *
@@ -37,13 +39,21 @@ public class AutoPayParkingApp extends Application {
                 getClass().getResource("/fxml/main-view.fxml"));
         loader.setControllerFactory(springContext::getBean);
 
-        Parent root = loader.load();
-        Scene scene = new Scene(root, 1280, 800);
+        Region root = loader.load();
+        Rectangle2D screen = Screen.getPrimary().getVisualBounds();
+        ScaledRoot scaledRoot = new ScaledRoot(root);
+        springContext.getBean(ViewNavigator.class).portraitProperty()
+                .bind(scaledRoot.portraitProperty());
+        Scene scene = new Scene(scaledRoot, screen.getWidth(), screen.getHeight());
         scene.getStylesheets().add(
                 getClass().getResource("/css/styles.css").toExternalForm());
 
         primaryStage.setTitle("Autopago Estacionamiento");
         primaryStage.setScene(scene);
+        // Al salir de pantalla completa (menú de opciones o ESC) queda una ventana maximizada.
+        primaryStage.setMaximized(true);
+        primaryStage.setFullScreenExitHint("");
+        primaryStage.setFullScreen(true);
         primaryStage.show();
     }
 

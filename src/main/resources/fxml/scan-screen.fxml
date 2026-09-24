@@ -1,28 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.autopay.parking.ui.util.IconView?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 
 <VBox fx:id="scanRoot" xmlns:fx="http://javafx.com/fxml/1"
-       fx:controller="com.autopay.parking.ui.controller.ScanScreenController"
-       styleClass="screen" spacing="24" alignment="CENTER" focusTraversable="true">
+      fx:controller="com.autopay.parking.ui.controller.ScanScreenController"
+      styleClass="screen" spacing="22" alignment="TOP_CENTER" focusTraversable="true">
     <HBox fx:id="stepsBox" alignment="CENTER"/>
-    <VBox styleClass="card" alignment="CENTER" spacing="20" maxWidth="720">
-        <StackPane fx:id="scanIconBox" styleClass="icon-stage-lg"/>
-        <Label styleClass="title" text="Escanee su ticket"/>
-        <Label styleClass="subtitle" text="Acerca el código de barras o QR al escáner"/>
-        <Label fx:id="statusLabel" styleClass="status-waiting" text="LISTO — espere la lectura"/>
-        <Label fx:id="detailsLabel" styleClass="status-error" wrapText="true" text=""/>
-        <Label styleClass="form-hint" text="Ingreso manual del código (opcional):"/>
+
+    <VBox styleClass="card, scan-card" alignment="CENTER" spacing="14" maxWidth="760">
+        <!-- Lector listo: anillo pulsante alrededor del icono -->
+        <StackPane styleClass="scan-hero">
+            <Circle fx:id="pulseRing" styleClass="pulse-ring" radius="54"/>
+            <StackPane fx:id="scanIconStage" styleClass="icon-stage-lg">
+                <IconView icon="QR_SCANNER" size="56"/>
+            </StackPane>
+        </StackPane>
+
+        <VBox alignment="CENTER" spacing="6">
+            <Label styleClass="title" text="Escanee su ticket"/>
+            <Label styleClass="subtitle" wrapText="true" textAlignment="CENTER"
+                   text="Acerque el código de barras o QR de su ticket al lector"/>
+        </VBox>
+
+        <HBox fx:id="statusPill" styleClass="status-pill, status-ready" alignment="CENTER" spacing="10"
+              maxWidth="-Infinity">
+            <Circle styleClass="status-dot" radius="6"/>
+            <Label fx:id="statusLabel" styleClass="status-text" text="Lector listo"/>
+        </HBox>
+
+        <HBox fx:id="errorBox" styleClass="alert, alert-error" alignment="CENTER_LEFT" spacing="14"
+              visible="false" managed="false" maxWidth="600">
+            <IconView icon="ERROR" size="30"/>
+            <VBox spacing="2" HBox.hgrow="ALWAYS" minWidth="0">
+                <Label fx:id="errorTitleLabel" styleClass="alert-title" text=""/>
+                <Label fx:id="errorMessageLabel" styleClass="alert-text" wrapText="true"
+                       minHeight="-Infinity" text=""/>
+            </VBox>
+        </HBox>
+
+        <HBox styleClass="divider" alignment="CENTER" spacing="14" maxWidth="560">
+            <Region styleClass="divider-line" HBox.hgrow="ALWAYS"/>
+            <Label styleClass="divider-text" text="o escriba el código del ticket"/>
+            <Region styleClass="divider-line" HBox.hgrow="ALWAYS"/>
+        </HBox>
+
         <HBox spacing="12" alignment="CENTER">
-            <TextField fx:id="manualCodeField" promptText="Ej: TKT-100001"
-                       styleClass="manual-input" prefWidth="260"/>
-            <Button styleClass="button-primary" text="Buscar"
-                    fx:id="manualSearchButton" onAction="#onManualSearch"/>
+            <HBox styleClass="input-shell" alignment="CENTER_LEFT" spacing="10" prefWidth="340">
+                <IconView icon="TICKET" size="22" styleClass="input-icon"/>
+                <TextField fx:id="manualCodeField" promptText="Ej: TKT-100001"
+                           styleClass="manual-input" HBox.hgrow="ALWAYS"
+                           onAction="#onManualSearch"/>
+            </HBox>
+            <Button fx:id="manualSearchButton" styleClass="button-primary, button-lg"
+                    text="Buscar" onAction="#onManualSearch">
+                <graphic>
+                    <IconView icon="SEARCH" size="22"/>
+                </graphic>
+            </Button>
         </HBox>
     </VBox>
+
+    <HBox styleClass="hint-row" alignment="CENTER" spacing="8">
+        <IconView icon="INFO" size="18"/>
+        <Label styleClass="form-hint"
+               text="El código aparece debajo del código de barras de su ticket de entrada."/>
+    </HBox>
 </VBox>

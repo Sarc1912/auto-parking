@@ -1,39 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.autopay.parking.ui.util.IconView?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.autopay.parking.ui.controller.ConfirmScreenController"
-      styleClass="screen" spacing="24" alignment="CENTER">
+      styleClass="screen" spacing="22" alignment="TOP_CENTER">
     <HBox fx:id="stepsBox" alignment="CENTER"/>
-    <Label styleClass="title" text="Confirme su ticket"/>
-    <VBox styleClass="card" alignment="CENTER" spacing="16" maxWidth="680">
-        <Label fx:id="ticketCodeLabel" styleClass="ticket-code" text="—"/>
-        <HBox spacing="24" alignment="CENTER">
-            <VBox styleClass="detail-box" alignment="CENTER" spacing="6">
-                <Label styleClass="detail-label" text="Entrada"/>
-                <Label fx:id="entryTimeLabel" styleClass="detail-value" text="—"/>
+
+    <VBox alignment="CENTER" spacing="4">
+        <Label styleClass="title" text="Confirme su ticket"/>
+        <Label styleClass="subtitle" text="Verifique que los datos sean correctos antes de pagar"/>
+    </VBox>
+
+    <VBox styleClass="card" spacing="22" maxWidth="860">
+        <!-- Encabezado del ticket -->
+        <HBox alignment="CENTER_LEFT" spacing="16">
+            <StackPane styleClass="icon-stage">
+                <IconView icon="TICKET" size="32"/>
+            </StackPane>
+            <VBox spacing="2">
+                <Label styleClass="detail-label" text="Código del ticket"/>
+                <Label fx:id="ticketCodeLabel" styleClass="ticket-code" text="—"/>
             </VBox>
-            <VBox styleClass="detail-box" alignment="CENTER" spacing="6">
-                <Label styleClass="detail-label" text="Tiempo"/>
-                <Label fx:id="durationLabel" styleClass="detail-value" text="—"/>
-            </VBox>
-            <VBox styleClass="detail-box" alignment="CENTER" spacing="6">
-                <Label styleClass="detail-label" text="Tarifa"/>
-                <Label fx:id="tariffLabel" styleClass="detail-value" text="—"/>
-            </VBox>
+            <Region HBox.hgrow="ALWAYS"/>
+            <HBox fx:id="plateChip" styleClass="chip" alignment="CENTER" spacing="8">
+                <IconView icon="CAR" size="20"/>
+                <Label fx:id="plateLabel" styleClass="chip-text" text="—"/>
+            </HBox>
         </HBox>
-        <Region prefHeight="1"/>
-        <Label styleClass="detail-label" text="Total a pagar"/>
-        <Label fx:id="amountLabel" styleClass="amount-big" text="—"/>
-        <Label fx:id="amountUsdLabel" styleClass="amount-usd" text="—"/>
-        <HBox spacing="16">
-            <Button styleClass="button-secondary" text="Cancelar" onAction="#onCancelClicked"/>
-            <Button styleClass="button-primary button-lg" text="Pagar ahora" onAction="#onPayClicked"/>
+
+        <!-- Detalle de permanencia -->
+        <HBox spacing="14">
+            <HBox styleClass="info-tile" spacing="12" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                <StackPane styleClass="icon-stage-sm">
+                    <IconView icon="CLOCK" size="22"/>
+                </StackPane>
+                <VBox spacing="2">
+                    <Label styleClass="detail-label" text="Hora de entrada"/>
+                    <Label fx:id="entryTimeLabel" styleClass="detail-value" text="—"/>
+                    <Label fx:id="entryDateLabel" styleClass="detail-caption" text="—"/>
+                </VBox>
+            </HBox>
+            <HBox styleClass="info-tile" spacing="12" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                <StackPane styleClass="icon-stage-sm">
+                    <IconView icon="HOURGLASS" size="22"/>
+                </StackPane>
+                <VBox spacing="2">
+                    <Label styleClass="detail-label" text="Tiempo estacionado"/>
+                    <Label fx:id="durationLabel" styleClass="detail-value" text="—"/>
+                </VBox>
+            </HBox>
+            <HBox styleClass="info-tile" spacing="12" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
+                <StackPane styleClass="icon-stage-sm">
+                    <IconView icon="TAG" size="22"/>
+                </StackPane>
+                <VBox spacing="2">
+                    <Label styleClass="detail-label" text="Tarifa"/>
+                    <Label fx:id="tariffLabel" styleClass="detail-value" text="—"/>
+                    <Label fx:id="tariffRateLabel" styleClass="detail-caption" text="—"/>
+                </VBox>
+            </HBox>
+        </HBox>
+
+        <!-- Total -->
+        <HBox styleClass="total-panel" alignment="CENTER_LEFT" spacing="16">
+            <VBox spacing="2">
+                <Label styleClass="total-label" text="Total a pagar"/>
+                <Label fx:id="amountUsdLabel" styleClass="amount-usd" text="—"/>
+            </VBox>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="amountLabel" styleClass="amount-big" text="—"/>
+        </HBox>
+
+        <HBox spacing="14" alignment="CENTER_RIGHT">
+            <Button styleClass="button-secondary, button-lg" text="Cancelar" onAction="#onCancelClicked"
+                    cancelButton="true">
+                <graphic>
+                    <IconView icon="CLOSE" size="22"/>
+                </graphic>
+            </Button>
+            <Button fx:id="payButton" styleClass="button-primary, button-lg" text="Continuar al pago"
+                    contentDisplay="RIGHT" onAction="#onPayClicked">
+                <graphic>
+                    <IconView icon="ARROW_FORWARD" size="22"/>
+                </graphic>
+            </Button>
         </HBox>
     </VBox>
 </VBox>
